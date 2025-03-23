@@ -1,6 +1,12 @@
-import "./globals.css";
+// app/layout.tsx
+import { ThemeProvider } from "next-themes";
+import "./globals.css"; // Import global styles
 import { ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+
+export const metadata = {
+  title: "PostHub",
+  description: "A platform for writers",
+};
 
 export default function RootLayout({
   children,
@@ -8,12 +14,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
-      <body>
-        <ToastContainer />
-
-        {children}
-      </body>
-    </html>
+    <ThemeProvider attribute="class">
+      {/* Wrap your layout components */}
+      <html lang="en">
+        <body>
+          <ToastContainer /> {children}
+          {/* Footer, or other layout components */}
+        </body>
+      </html>
+    </ThemeProvider>
   );
 }

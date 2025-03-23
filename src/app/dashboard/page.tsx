@@ -5,7 +5,7 @@ import { verifyToken, logoutUser } from "../../../utils/auth";
 import axios from "axios";
 import Link from "next/link";
 import Sidebar from "../components/Sidebar";
-
+import Menu from "../../../public/more.png";
 const ITEMS_PER_PAGE = 6;
 
 export default function Dashboard() {

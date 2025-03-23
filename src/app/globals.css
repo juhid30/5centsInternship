@@ -8,6 +8,10 @@
   --secondary: #64748b;
   --accent: #f97316;
 }
+.dark body {
+  background-color: #1a202c; /* Dark background color */
+  color: white; /* Dark text color */
+}
 
 @layer base {
   body {
