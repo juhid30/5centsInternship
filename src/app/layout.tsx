@@ -1,5 +1,6 @@
 import "./globals.css";
-import ClientNavbar from "./components/ClientNavbar"; // Import the Client Navbar
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export default function RootLayout({
   children,
@@ -9,7 +10,8 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <ClientNavbar /> {/* Conditionally renders Navbar */}
+        <ToastContainer />
+
         {children}
       </body>
     </html>
