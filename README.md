@@ -1,36 +1,148 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Next.js Authentication and Dynamic Dashboard
 
-## Getting Started
+This project demonstrates how to implement authentication (login/logout) along with a dynamic dashboard that fetches and filters data from an external API. The dashboard includes a user authentication system with JWT and MongoDB, as well as a posts display with filtering, search, and pagination features.
 
-First, run the development server:
+## Features
+
+- **Authentication**:
+  - User registration and login using email and password.
+  - JWT token-based authentication for secure access.
+  - Protected routes to ensure only authenticated users can access the dashboard.
+
+- **Dashboard**:
+  - Displays data from a mock API (JSONPlaceholder) with search and filter capabilities.
+  - Pagination for easy navigation through large data sets.
+  
+- **Responsive Design**:
+  - Fully responsive layout using Tailwind CSS.
+
+## Technologies Used
+
+- **Next.js (App Router)** for building the app.
+- **MongoDB** for storing user data.
+- **bcryptjs** for password hashing.
+- **jsonwebtoken (JWT)** for generating secure tokens.
+- **Tailwind CSS** for styling.
+- **Framer Motion** for animations.
+
+## Setup Instructions
+
+Follow these steps to set up the project on your local machine.
+
+### 1. Clone the Repository
+
+Clone this repository to your local machine:
+
+```bash
+git clone https://github.com/your-username/nextjs-dashboard-auth.git
+cd nextjs-dashboard-auth
+```
+
+### 2. Install Dependencies
+
+Install all required dependencies by running the following command:
+
+```bash
+npm install
+```
+
+### 3. Set up Environment Variables
+
+Create a .env.local file in the root of your project and add the following environment variables:
+
+```bash
+MONGODB_URI=mongodb://localhost:27017/your-database-name # Replace with your MongoDB URI
+JWT_SECRET=your_jwt_secret_key # A secure key for signing JWT token.
+```
+Note: Email me for the .env file.
+
+### 4. Run the Application
+
+Run the development server:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+The application will be available at http://localhost:3000.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Endpoints
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### 1. User Registration (POST /api/auth/register)
+- **URL**: `/api/auth/register`
+- **Method**: `POST`
 
-## Learn More
+### Request Body:
 
-To learn more about Next.js, take a look at the following resources:
+```json
+{
+  "email": "user@example.com",
+  "password": "password123"
+}
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### Response:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- **Success**:
+```json
+{ "message": "User registered successfully" }
+```
 
-## Deploy on Vercel
+### 2. User Login (POST /api/auth/login)
+- **URL**: `/api/auth/login`
+- **Method**: `POST`
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### Request Body:
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```json
+{
+  "email": "user@example.com",
+  "password": "password123"
+}
+```
+
+### Response:
+
+- **Success**:
+```json
+{ "token": "JWT_TOKEN" }
+```
+
+### 3. Token Verification (POST /api/auth/verify)
+- **URL**: `/api/auth/verify`
+- **Method**: `POST`
+
+### Request Body:
+
+```json
+{
+  "token": "JWT_TOKEN"
+}
+```
+
+### Response:
+
+- **Success**:
+```json
+{ "user": { "email": "user@example.com" } }
+```
+
+
+### 4. Fetch Posts Data (GET /api/posts)
+- **URL**: `/api/posts`
+- **Method**: `GET`
+
+### Response:
+
+- **Success**:
+```json
+[
+  {
+    "id": 1,
+    "title": "Post Title",
+    "body": "Post content"
+  }
+]
+```
+
+This endpoint fetches posts from the JSONPlaceholder API.
